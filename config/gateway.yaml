@@ -1,0 +1,40 @@
+gateway:
+  api_key: ${GW_API_KEY}
+  default_strategy: cost_quality   # fallback | cost_quality | latency | round_robin
+  cache_ttl_seconds: 300
+  per_minute_limit: 60
+
+providers:
+  azure:
+    enabled: true
+    type: openai_compatible
+    weight: 1
+    cost_per_1k_input: 0.003
+    cost_per_1k_output: 0.015
+  aws_bedrock:
+    enabled: true
+    type: anthropic_compatible
+    weight: 1
+  openai:
+    enabled: true
+    type: openai_compatible
+    weight: 0
+  anthropic:
+    enabled: true
+    type: anthropic_compatible
+    weight: 1
+  kiro:
+    enabled: false
+    type: anthropic_compatible
+    weight: 0
+
+routing:
+  fallbacks:
+    claude-sonnet-4.5:
+      - anthropic
+      - aws_bedrock
+    gpt-4o:
+      - openai
+      - azure
+  quarantine_seconds: 60   # proveedor en fallo se excluye temporalmente
+  max_attempts: 3

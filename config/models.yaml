@@ -1,0 +1,23 @@
+# Catálogo de modelos expuestos por el gateway.
+# Cada modelo declara sus proveedores posibles y el costo (FinOps).
+models:
+  - id: claude-opus-4.5
+    providers: [anthropic, aws_bedrock]
+    context_window: 200000
+    input_cost_per_1k: 0.015
+    output_cost_per_1k: 0.075
+  - id: claude-sonnet-4.5
+    providers: [anthropic, aws_bedrock]
+    context_window: 200000
+    input_cost_per_1k: 0.003
+    output_cost_per_1k: 0.015
+  - id: gpt-4o
+    providers: [openai, azure]
+    context_window: 128000
+    input_cost_per_1k: 0.0025
+    output_cost_per_1k: 0.010
+  - id: deepseek-v3.2
+    providers: [kiro, openai]       # labs internos / costo bajo
+    context_window: 128000
+    input_cost_per_1k: 0.00027
+    output_cost_per_1k: 0.00110
